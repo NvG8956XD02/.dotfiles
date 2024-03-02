@@ -114,7 +114,10 @@
     git
     git-crypt
     home-manager
-  ];
+  ] ++ ( [
+    (import (./. + "../../../user/bin/scripts/apply-system.nix") { inherit pkgs; })
+    (import (./. + "../../../user/bin/scripts/apply-home.nix") { inherit pkgs; })
+  ]);
   
   security.polkit.enable = true; 
   system.stateVersion = "23.11"; # Did you read the comment?

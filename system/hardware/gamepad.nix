@@ -1,13 +1,18 @@
-{ pkgs, pkgs-unstable, ... }:
+{ lib,  ... }:
 
 {  
+  # Allow Unfree 
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "xow_dongle-firmware"
+    "steam-original"
+  ];
+  
+  # Wireless XBox Controller 
   hardware.xpadneo = {
     enable = true;
-    package = "${pkgs-unstable.xpadneo}";
   };
   
   hardware.xone = {
     enable = true;
-    package = "${pkgs-unstable.xpadneo}";
   };
 }
