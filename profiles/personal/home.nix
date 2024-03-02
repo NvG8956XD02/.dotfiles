@@ -26,12 +26,8 @@
     
     sxiv	# image viewer
     mpv		# video player
-
-    # Games 
-    #wine
-    #proton
-    #protonup-qt
-   
+    gimp	# Image Manipulator
+ 
   ];
 
   programs.home-manager.enable = true;

@@ -44,7 +44,7 @@
         browser = "firefox";
         defaultRoamDir = "";
         term = "foot";
-        font = "Hermit";
+        font = "Hurmit Nerd Font";
         fontPkgs = pkgs.hermit;
         editor = "emacs";
         emacsPkg = pkgs.emacs;
@@ -67,6 +67,8 @@
       #pkgs = nixpkgs.legacyPackages.${systemSettings.system};
       #pkgs-unstable = nixpkgs-unstable.legacyPackages.${systemSettings.system};
     in { 
+      # -- Development Environments -- #
+      devShells.${systemSettings.system}.lisp = (import ./user/dev/lisp/lisp.nix { inherit pkgs; } );
       # -- NixOS Flake -- #
       nixosConfigurations = {
         ruins = nixpkgs.lib.nixosSystem {

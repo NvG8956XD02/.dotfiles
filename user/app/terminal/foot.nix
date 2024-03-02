@@ -1,4 +1,4 @@
-{ pkgs , ... }:
+{ pkgs , userSettings, ... }:
 
 {
   programs.foot = {
@@ -8,7 +8,7 @@
     settings = {
       main = {
         term = "foot";
-        font = "Hermit:size=11";
+        font = "${userSettings.font}:size=11";
         box-drawings-uses-font-glyphs = "no";
         dpi-aware = "yes";
       };

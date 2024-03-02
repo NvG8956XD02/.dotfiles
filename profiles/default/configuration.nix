@@ -15,6 +15,7 @@
       ../../system/hardware-configuration.nix
       ../../system/hardware/systemd.nix		# systemd config
       ../../system/hardware/kernel.nix		# kernel config
+      ../../system/hardware/ssd.nix		# SSD setting , fstrim
       ../../system/hardware/power.nix		# Power Management
       ../../system/hardware/time.nix		# Network time
       ../../system/hardware/opengl.nix		# enable opengl
@@ -25,6 +26,7 @@
       ../../system/security/gpg.nix		# Gnu key
       ../../system/security/firewall.nix	# Basic Firewall
       ../../system/security/automount.nix	# Mounting
+      ../../system/security/ssh.nix		# OpenSSH 
       ../../system/style/stylix.nix		# Style
     ];
  
@@ -78,7 +80,7 @@
     uid = 1000;
   };
 
-  # -- Set ZSH shell
+  # -- Set ZSH shell as Default
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;  

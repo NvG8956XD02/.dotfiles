@@ -16,7 +16,7 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/07431026-68c7-42b9-b93a-7e585a9f7661";
       fsType = "btrfs";
-      options = [ "subvol=root" "compress=zstd" "noatime" "clear_cache" "space_cache=v2" "commit=120" ];
+      options = [ "subvol=root" "compress=zstd" "noatime" "noatime" "clear_cache" "space_cache=v2" "commit=120" ];
     };
 
   fileSystems."/home" =
