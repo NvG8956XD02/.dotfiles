@@ -1,8 +1,10 @@
-{ config, pkgs, pkgs-unstable, systemSettings, userSettings, ... }:
+{ config, pkgs, pkgs-unstable, stylix, systemSettings, userSettings, ... }:
 
 {
   imports = [
     ../default/home.nix  # --> load the defaults
+    stylix.homeManagerModules.stylix
+    ../../user/style/stylix.nix 
   ];
  
   home.username = userSettings.username;
@@ -26,12 +28,8 @@
     
     sxiv	# image viewer
     mpv		# video player
+    gimp	# Image Manipulator
 
-    # Games 
-    #wine
-    #proton
-    #protonup-qt
-   
   ];
 
   programs.home-manager.enable = true;

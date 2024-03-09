@@ -18,7 +18,7 @@
     terminus_font
     font-awesome
     weather-icons
-    hermit
+    liberation_ttf
     # Icons & Symbolics
     noto-fonts
     noto-fonts-cjk

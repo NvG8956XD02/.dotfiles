@@ -9,13 +9,21 @@
     '';
   };
   
+  # Enable and Schedule Garbage Collections
+  nix.gc = {
+    automatic = true;
+    dates = "monthly";
+    options = "--delete-older-than 30d";
+  };
+
   # -- Import modules
   imports =
     [ 
       ../../system/hardware-configuration.nix
       ../../system/hardware/systemd.nix		# systemd config
       ../../system/hardware/kernel.nix		# kernel config
-      ../../system/hardware/power.nix		# Power Management
+      ../../system/hardware/ssd.nix		# SSD setting , fstrim
+      ../../system/hardware/power.nix		# Power Management ( - For Laptop)
       ../../system/hardware/time.nix		# Network time
       ../../system/hardware/opengl.nix		# enable opengl
       ../../system/hardware/vdriver.nix		# Video driver - amdgpu - mesa
@@ -25,29 +33,33 @@
       ../../system/security/gpg.nix		# Gnu key
       ../../system/security/firewall.nix	# Basic Firewall
       ../../system/security/automount.nix	# Mounting
-      ../../system/style/stylix.nix		# Style
+      ../../system/security/ssh.nix		# OpenSSH 
+      
+      ../../system/style/stylix.nix		# Stylix
     ];
  
   # -- Kernel modules
   boot.kernelModules = [ "i2c-dev" "i2c-piix4" "cpureq_powersave" ];
+  boot.kernelParams = [ "quiet" ];
   boot.supportedFilesystems = [ "btrfs" ];
   
   # -- Bootloader
   boot.loader = {
-    systemd-boot.enable = false;
+    systemd-boot.enable = if (systemSettings.bootMode == "uefi") then true else false;
     efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
+      canTouchEfiVariables = if (systemSettings.bootMode == "uefi") then true else false;
+      efiSysMountPoint = systemSettings.bootMountPath;
     };   
     grub = {
-      enable = true;
-      devices = [ "nodev" ];
-      efiSupport = true;
-      #version = 2;
+      devices = systemSettings.grubDevice;
+      enable = if (systemSettings.bootMode == "uefi") then false else true;
+      efiSupport = true;      
       useOSProber = true;
     };
   };
-
+  #boot.plymouth.enable = true;
+  #boot.plymouth.theme = "breeze";  
+ 
   # -- Networking
   networking.hostName = systemSettings.hostname;
   networking.networkmanager.enable = true;
@@ -78,7 +90,7 @@
     uid = 1000;
   };
 
-  # -- Set ZSH shell
+  # -- Set ZSH shell as Default
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;  
@@ -112,7 +124,10 @@
     git
     git-crypt
     home-manager
-  ];
+  ] ++ ( [
+    (import (./. + "../../../user/bin/scripts/apply-system.nix") { inherit pkgs; })
+    (import (./. + "../../../user/bin/scripts/apply-home.nix") { inherit pkgs; })
+  ]);
   
   security.polkit.enable = true; 
   system.stateVersion = "23.11"; # Did you read the comment?
