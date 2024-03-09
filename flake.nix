@@ -17,8 +17,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    # -- Stylix -- #
-    stylix.url = "github:danth/stylix";
+    # -- StyleScheme - Nix-color  -- #
+    stylix.url = "github:danth/stylix/release-23.11";
    
   };
 
@@ -31,6 +31,9 @@
         profile = "personal";
         timezone = "Europe/Budapest";
         locale = "en_US.UTF-8";
+        bootMode = "uefi";
+        bootMountPath = "/boot";
+        grubDevice = "";
       };
       # ----- [ User Settings ] ----- #
       userSettings = rec {
@@ -38,18 +41,19 @@
         name = "Davy";
         email = "";
         dotFiles = "~/.dotfiles";
-        theme = "";
+        theme = "ayu-dark";			# Theme List : { ayo-dark, nord, }
         wm = "sway";
         wmType = "wayland";     		# Now just can be wayland, because
         browser = "firefox";
         defaultRoamDir = "";
         term = "foot";
         font = "Hurmit Nerd Font";
-        fontPkgs = pkgs.hermit;
-        editor = "emacs";
+        fontPkg = pkgs.nerdfonts.override { fonts = [ "Hermit" ]; };
+        editor = "emacsclient";
         emacsPkg = pkgs.emacs;
         gitName = "NvG8956XD02";
-        gitEmail = "gutenburg429@gmail.com";
+        gitEmail = "gutenburg429@gmail.com"; 
+
       };
       nixpkgs-patched = (import nixpkgs { system = systemSettings.system;} ).applyPatches {
         name = "nixpkgs-patched";

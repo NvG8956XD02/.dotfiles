@@ -10,5 +10,12 @@
       ../../system/security/gpg.nix
       ../../system/security/firewall.nix
     ];
+
+  # Enable and Schedule Garbage Collections
+  nix.gc = {
+    automatic = true;
+    dates = "monthly";
+    options = "--delete-older-than 30d";
+  };
 }
 

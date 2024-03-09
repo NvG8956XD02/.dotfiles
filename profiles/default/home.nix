@@ -23,6 +23,10 @@
     alacritty
     git
     vim
+    
+    ## Dunno its needed or not
+    dmenu
+    bemenu 
   ];
   
   xdg.enable = true;
@@ -48,6 +52,6 @@
     TERM = userSettings.term;
     BROWSER = userSettings.browser;
   };
-  
+    
   home.stateVersion = "23.11";
 }

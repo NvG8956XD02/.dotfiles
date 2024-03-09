@@ -25,7 +25,8 @@
     enable = true;
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
-      swaylock swayidle
+      #swaylock 
+      swaylock-effects swayidle
       waybar
       wl-clipboard
       wf-recorder
@@ -42,9 +43,8 @@
       export _JAVA_AWT_WM_NONREPARENTING=1
       export MOZ_ENABLE_WAYLAND=1
     '';
-  };
-  
-  # -- Waybar -- # 
+  }; 
+  # -- Waybar && SWWW  -- # 
   environment.systemPackages = [
     (pkgs.waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

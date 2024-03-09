@@ -6,12 +6,18 @@
   programs.rofi = {
     enable = true;
     plugins = with pkgs; [
+      rofi-top
+      rofi-emoji
+      rofi-pulse-select
       rofi-calc
     ];
     font = "Roboto 14";
     terminal = "${usersettings.term}";
     extraConfig = {
-      modi = "drun,emoji,ssh";
+      modi = "drun,run,emoji";
+      sidebar-mode = true;
+      show-icons = true;
+      icon-theme = "Noto Color Emoji";
     };
     theme = 
     let
