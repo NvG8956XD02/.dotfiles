@@ -139,7 +139,7 @@ in {
         startup = [
           # -- Here are goes the startups 
           { command = "swww init"; always = true; }
-          { command = "~/.background-stylix"; always = false; }
+          { command = "~/.background-stylix"; always = true; }
         ];
     }; 
     extraSessionCommands = ''
@@ -148,7 +148,7 @@ in {
       export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
       export _JAVA_AWT_WM_MONREPARENTING=1
 
-      export SWWW_TRANSITION_STEP=15
+      export SWWW_TRANSITION_STEP=5
       export SWWW_TRANSITION_FPS=30
     '';
     extraConfig = ''

@@ -5,6 +5,7 @@
     ../default/home.nix  # --> load the defaults
     stylix.homeManagerModules.stylix
     ../../user/style/stylix.nix 
+    ../../user/shell/starship.nix
   ];
  
   home.username = userSettings.username;

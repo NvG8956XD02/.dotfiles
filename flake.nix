@@ -41,7 +41,7 @@
         name = "Davy";
         email = "";
         dotFiles = "~/.dotfiles";
-        theme = "ayu-dark";			# Theme List : { ayo-dark, nord, }
+        theme = "gruvbox-dark";			# Theme List : { ayo-dark, nord, }
         wm = "sway";
         wmType = "wayland";     		# Now just can be wayland, because
         browser = "firefox";
