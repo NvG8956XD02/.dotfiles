@@ -15,29 +15,92 @@
      
       format = lib.concatStrings [
 	# -- Section #START -- #
-        " [](bg:#00000000 fg:yellow)"
-	"[ ](bg:yellow fg:bg)"
-        "[](bg:comm fg:yellow)"
-        # -- Section #1 -- #
+        "[┌─](bg:#00000000 fg:orange)"
+	#"[ ](bg:orange fg:bg)"
+        "$os"
+        "[](bg:fg fg:orange)"
+        # -- Section #DIR -- #
         "$directory"
-        "[](bg:selection fg:comm)"
-        # -- Section #2 -- # 
+        "[](bg:green fg:fg)"
+        # -- Section #TIME -- #
+        "$time"
+        "[](bg:selection fg:green)"
+        # -- Section #GIT -- # 
         "$git_branch"
 	"$git_status"
 	"$git_metrics" 
-        "[](bg:#0000000 fg:selection)"
+        "[](bg:red fg:selection)"
+        # -- Section #PROJECT -- # 
+        "$nodejs" "$java$kotlin$gradle" "$rust" "$haskell" "$elixir"
+        "[](bg:#0000000 fg:red)"
         # -- Section #END -- #
-        "$character"
+        "$line_break"
+        "[└─](bg:#0000000 fg:orange)"
+        "$nix_shell $character"
       ];
       
       # -- Elements -- #
+      line_break = {
+        disabled = false;
+      };
+      # Project Types
+      nodejs = {
+        style = "fg:fg bg:red";
+        format = "[ $symbol via [󱜙 $version](bg:red fg:bold fg)]($style)";
+        symbol = "󰎙"; 
+      };
+      java = {
+        style = "fg:fg bg:red";
+        format = "[ $symbol via [󱐩 $version](bg:red fg:bold fg)]($style)";
+        symbol = "";
+      };
+      kotlin = {
+        style = "fg:fg bg:red";
+        format = "[ $symbol via [ $version](bg:red fg:bold fg)]($style)";
+        symbol = "";
+      };
+      gradle = {
+        style = "fg:fg bg:red";
+        format = "[ $symbol via [ $version](bg:red fg:bold fg)]($style)";
+        symbol = "";
+      };
+      rust = {
+        style = "fg:fg bg:red";
+        format = "[ $symbol via [󰔽 $version](bg:red fg:bold fg)]($style)";
+        symbol = "";
+      };
+      haskell = {
+        style = "fg:fg bg:red";
+        format = "[ $symbol via [ $version](bg:red fg:bold fg)]($style)";
+        symbol = "";
+      };
+      elixir = {
+        style = "fg:fg bg:red";
+        format = "[ $symbol via [󰍖 $version](bg:red fg:bold fg)]($style)";
+        symbol = "";
+      };
+      nix_shell = {
+        style = "fg:orange";
+        disabled = false;
+        impure_msg = "[impure]($style)";
+	pure_msg = "[pure]($style)";
+	unknown_msg = "";
+	format = "[\\[nix-shell:[$name](fg:bold orange)\\]]($style)";
+      };
       # Directory
       directory = {
         truncation_length = 2;
         truncation_symbol = "../";
         home_symbol = "~";
-        style = "bg:comm fg:fg";
+        style = "bg:fg fg:bg";
         format = "[ 󰝰 $path ]($style)";
+      };
+      # Time
+      time = {
+        disabled = false;
+        time_format = "%R"; # Hour:Minute Format
+        style = "bg:green";
+        format = "[[ 󱑍 $time ](bg:green fg:bg)]($style)";
       };
       # EndCharacter
       character = {
@@ -60,7 +123,29 @@
         deleted_style = "fg:bright-red bg:235";
         disabled = false;
       };   
- 
+      # OS
+      os = {
+        format = "[$symbol ]($style)";
+        style = "bg:orange fg:bg";
+        disabled = false;
+        symbols = {
+          Arch = "󰣇";
+          Artix = "";
+          Debian = "";
+          EndeavourOS = "";
+          Fedora = "";
+          Gentoo = "";
+          Linux = "";
+          Manjaro = "";
+          Mint = "󰣭";
+          NixOS = "";
+          Raspbian = "";
+          Ubuntu = "";
+          Unknown = "";
+          Windows = "";
+        };
+      };
+
       # -- Color -- #
       palettes."def" = {
         bg = "#" + config.lib.stylix.colors.base00;
