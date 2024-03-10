@@ -24,9 +24,9 @@
     git
     vim
     
-    ## Dunno its needed or not
-    dmenu
-    bemenu 
+    ## fetch
+    neofetch
+    pfetch
   ];
   
   xdg.enable = true;

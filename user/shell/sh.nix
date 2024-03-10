@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   myAliases = {
-  
+    emacs = "emacsclient -c -a 'emacs'"; 
   };
 
 in {
@@ -10,6 +10,9 @@ in {
     shellAliases = myAliases;
     history.size = 1024;
     enableAutosuggestions = true;
+    initExtra = ''
+      pfetch;
+    '';
   };
 
   programs.bash = {

@@ -10,7 +10,7 @@
       "$schema" = "https://starship.rs/config-schema.json";
       # -- Base -- #
       scan_timeout = 10;
-      add_newline = false;
+      add_newline = true;
       palette = "def";
      
       format = lib.concatStrings [
