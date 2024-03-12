@@ -27,6 +27,7 @@
       ../../system/hardware/time.nix		# Network time
       ../../system/hardware/opengl.nix		# enable opengl
       ../../system/hardware/vdriver.nix		# Video driver - amdgpu - mesa
+      ../../system/hardware/cpu.nix		# CPU driver
       ../../system/hardware/printing.nix	# enable printing
       ../../system/hardware/bluetooth.nix	# enable bluetooth
       (./. + "../../../system/wm"+("/"+userSettings.wm)+".nix") # Window Manager

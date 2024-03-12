@@ -2,7 +2,7 @@
 
 {
   # Fonts
-  fonts.packages = with pkgs; [ 
+  fonts.packages = with pkgs-unstable; [ 
     (nerdfonts.override { fonts = [ # -- Fonts
                                     "Hermit"
                                     "DroidSansMono"
@@ -20,8 +20,11 @@
     weather-icons
     liberation_ttf
     # Icons & Symbolics
+    ## Noto 
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
+    ## Papirus
+    papirus-icon-theme
   ];
 }

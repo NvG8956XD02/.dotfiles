@@ -70,9 +70,8 @@ in {
          in {
           # -- Basic stuff -- #
           "${mod}+Shift+Return" = "exec ${terminal}";
-          "${mod}+Shift+Q" = "kill";
-          #"${mod}+p" = "exec ${pkgs.rofi}/bin/rofi -show combi -combi-modes 'window,run,ssh' -modes combi --show-icons "; 
-          "${mod}+p" = "exec ${pkgs.rofi}/bin/rofi -show "; 
+          "${mod}+Shift+Q" = "kill"; 
+          "${mod}+p" = "exec ${pkgs.rofi}/bin/rofi -show"; 
           "${mod}+l" = "exec swaylock";
 
           # --= [ Window ] =-- #

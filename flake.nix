@@ -34,6 +34,8 @@
         bootMode = "uefi";
         bootMountPath = "/boot";
         grubDevice = "";
+        cpu = "amd";		# amd - intel
+        gpu = "amd";		# amd - intel
       };
       # ----- [ User Settings ] ----- #
       userSettings = rec {
