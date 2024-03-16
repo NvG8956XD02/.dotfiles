@@ -8,7 +8,6 @@
     ../../user/app/git/git.nix
     ../../user/app/launcher/rofi.nix
     ../../user/app/filemanager/yazi.nix
-    #../../user/app/emacs/emacs.nix 
     (./. + "../../../user/app/browser/"+("/"+userSettings.browser)+".nix")
   ];
 

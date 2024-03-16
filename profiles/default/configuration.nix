@@ -31,6 +31,7 @@
       ../../system/hardware/printing.nix	# enable printing
       ../../system/hardware/bluetooth.nix	# enable bluetooth
       (./. + "../../../system/wm"+("/"+userSettings.wm)+".nix") # Window Manager
+      ../../system/app/docker.nix		# Docker
       ../../system/security/gpg.nix		# Gnu key
       ../../system/security/firewall.nix	# Basic Firewall
       ../../system/security/automount.nix	# Mounting

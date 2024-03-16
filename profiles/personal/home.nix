@@ -6,6 +6,7 @@
     stylix.homeManagerModules.stylix
     ../../user/style/stylix.nix 
     ../../user/shell/starship.nix
+    ../../user/app/games/games.nix
   ];
  
   home.username = userSettings.username;
@@ -30,6 +31,7 @@
     sxiv	# image viewer
     mpv		# video player
     gimp	# Image Manipulator
+    kdenlive 	# Video editor   
 
   ];
 

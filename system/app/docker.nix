@@ -1,20 +1,10 @@
 { lib, userSettings, storageDriver ? null, ... }: 
 
-assert lib.asserts.assertOneof "storageDriver" storageDriver [
-  null
-  "aufs"
-  "btrfs"
-  "devicemapper"
-  "overlay"
-  "overlay2"
-  "zfs"
-];
-
 {
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;
-    storageDriver = storageDriver;
+    storageDriver = "btrfs";
     autoPrune.enable = true;
   };
   users.users.${userSettings.username}.extraGroups = [ "docker" ];
