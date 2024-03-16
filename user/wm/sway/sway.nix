@@ -71,7 +71,8 @@ in {
           # -- Basic stuff -- #
           "${mod}+Shift+Return" = "exec ${terminal}";
           "${mod}+Shift+Q" = "kill"; 
-          "${mod}+p" = "exec ${pkgs.rofi}/bin/rofi -show"; 
+          "${mod}+p" = "exec ${pkgs.rofi}/bin/rofi -show filebrowser";
+          "--release Super_L" = "exec ${pkgs.rofi}/bin/rofi -show drun"; 
           "${mod}+l" = "exec swaylock";
 
           # --= [ Window ] =-- #

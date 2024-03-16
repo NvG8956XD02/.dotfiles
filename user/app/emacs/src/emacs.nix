@@ -2,7 +2,7 @@
 let
 
 in {
-  home.packages = with pkgs; [
+  home.packages = with pkgs-unstable; [
     # Dependencies for Some Emacs Packages
     hunspell
     hunspellDicts.en-us
@@ -17,8 +17,6 @@ in {
     ];
    
     extraConfig = ''
-      (global-visual-line-mode t)
-      (global-display-line-numbers-mode 1)
     '';
   }; 
   services.emacs.enable = true; 
