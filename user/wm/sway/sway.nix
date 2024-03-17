@@ -11,11 +11,12 @@ in {
     (./. + "../../../app/terminal"+("/"+userSettings.term)+".nix")
     ./waybar/waybar.nix
     ./swaylock/swaylock.nix
+    ./notify/mako.nix
   ];
    
   gtk.cursorTheme = {
-    package = pkgs.quintom-cursor-theme;
-    name = "Quintom_Ink";
+    package = pkgs.nordzy-cursor-theme;
+    name = "Nordzy";
     size = 36;
   };
 

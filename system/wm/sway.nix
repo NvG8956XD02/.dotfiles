@@ -32,6 +32,7 @@
       wf-recorder
       grim
       slurp
+      mako
 
       # -- SystemD Service -- #
       kanshi
