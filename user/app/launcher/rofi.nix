@@ -20,9 +20,9 @@
       show-icons = true;
       icon-theme = lib.mkForce "Papirus";
 
-      display-drun = "Apps: ";
-      display-file-browser-extended = "Files: ";
-      display-window = "Windows: ";
+      display-drun = "🖥️ Apps: ";
+      display-file-browser-extended = "🗄️ Files: ";
+      display-window = "🪟 Windows: ";
     };
 
   };

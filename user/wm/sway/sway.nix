@@ -163,6 +163,9 @@ in {
     
       assign [app_id="steam"] workspace number 3
       assign [app_id="lutris"] workspace number 3
+
+      
+      seat seat0 xcursor_theme Nordzy-cursors 24
     '';
   };
 }

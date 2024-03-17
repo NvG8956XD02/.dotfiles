@@ -81,18 +81,29 @@ in {
       };
     };
   };
+  # Cursor
+  home.pointerCursor = {
+    package = lib.mkForce pkgs.nordzy-cursor-theme;
+    name = lib.mkForce "Nordzy-cursors";
+    size = lib.mkForce 24;
+    x11 = {
+      enable = true;
+      defaultCursor = "Nordzy-cursors";
+    };
+    gtk.enable = true;
+  };  
 
   # GTK Application Styling
   gtk = {
     enable = true;
     iconTheme = {
-      package = pkgs.papirus-nord;
+      package = pkgs.papirus-icon-theme;
       name = "Papirus-Nord";
     };
     cursorTheme = {
       package = pkgs.nordzy-cursor-theme;
-      name = "Nordzy-Cursors";
-      size = 36;
+      name = "Nordzy-cursors";
+      size = 24;
     };
     theme = {
       package = lib.mkForce pkgs.gnome.gnome-themes-extra;
@@ -112,14 +123,18 @@ in {
     };
   };
   home.sessionVariables.GTK_THEME = "Adwaita";
+  home.sessionVariables.GS_CURSOR_THEME = "Nordzy-cursor";
 
   # QT Application Styling
   qt = {
     enable = true;
-    platformTheme = "gnome";
+    platformTheme = lib.mkForce "gnome";
     style = {
       package = pkgs.adwaita-qt;
       name = "adwaita-dark";
     };
+  };
+  home.sessionVariables = {
+    QT_CURSOR_THEME = "Nordzy-cursor";
   };
 }
