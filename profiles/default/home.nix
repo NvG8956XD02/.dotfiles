@@ -41,6 +41,7 @@
     publicShare = null;
     extraConfig = {
       XDG_DOTFILES_DIR = "${config.home.homeDirectory}/.dotfiles";
+      XDG_PROJECTS_DIR = "${config.home.homeDirectory}/Projects";
     };
   };
   xdg.mime.enable = true;

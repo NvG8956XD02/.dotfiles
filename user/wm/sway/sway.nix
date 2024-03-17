@@ -13,12 +13,6 @@ in {
     ./swaylock/swaylock.nix
     ./notify/mako.nix
   ];
-   
-  gtk.cursorTheme = {
-    package = pkgs.nordzy-cursor-theme;
-    name = "Nordzy";
-    size = 36;
-  };
 
   ## Sway WM
   wayland.windowManager.sway = {
@@ -72,8 +66,9 @@ in {
           # -- Basic stuff -- #
           "${mod}+Shift+Return" = "exec ${terminal}";
           "${mod}+Shift+Q" = "kill"; 
-          "${mod}+p" = "exec ${pkgs.rofi}/bin/rofi -show filebrowser";
-          "--release Super_L" = "exec ${pkgs.rofi}/bin/rofi -show drun"; 
+          "${mod}+p" = "exec rofi -modes 'file-browser-extended' -show file-browser-extended -file-browser-dir ~";
+          "--release Super_L" = "exec rofi -modes 'drun' -show drun"; 
+          "${mod}+Tab" = "exec rofi -modes 'window'  -show window";
           "${mod}+l" = "exec swaylock";
 
           # --= [ Window ] =-- #

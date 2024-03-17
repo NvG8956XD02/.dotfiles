@@ -10,8 +10,11 @@
       { event = "lock"; command = "lock"; }
     ];
     timeouts = [
-      { timeout = 300; command = ''${pkgs.swaylock-effects}/bin/swaylock -f''; }
-      { timeout = 360; command = ''swaymsg "output * dpms off" resume swaymsg "output * dpms off" ''; }
+      { timeout = 300;
+        command = ''${pkgs.swaylock-effects}/bin/swaylock -f''; }
+      { timeout = 360; 
+        command = ''swaymsg "output * dpms off" ''; 
+        resumeCommand = ''swaymsg "output * dpms on" ''; }
     ];
   };
   

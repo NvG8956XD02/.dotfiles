@@ -52,19 +52,38 @@ in {
       rofi.enable = true;
       sway.enable = true;
       swaylock.enable = true;
-      # swaylock.useImage = true;
-      # mako.enable = true;
+      #swaylock.useImage = true;
+      mako.enable = true;
       waybar.enable = true;
       
       sxiv.enable = true;
     };
   };  
-  
-  home.packages = with pkgs; [ swww ];
+
+  home.packages = with pkgs; [ 
+    swww				# Background
+    papirus-nord			# Icon-theme
+    nordzy-cursor-theme			# Cursor
+  ];
   home.file.".background-stylix" = {
     text = ''
       swww img ''+config.stylix.image+'';
     '';
     executable = true;
+  };
+ 
+  # GTK Styling
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = "${pkgs.papirus-nord}";
+      name = "Papirus-Nord";
+    };
+    cursorTheme = {
+      package = "${pkgs.nordzy-cursor-theme}";
+      name = "Nordzy-Cursors";
+      size = 36;
+    };
+    theme.name = lib.mkForce userSettings.theme;
   };
 }
