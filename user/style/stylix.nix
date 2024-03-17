@@ -62,8 +62,8 @@ in {
 
   home.packages = with pkgs; [ 
     swww				# Background
-    papirus-nord			# Icon-theme
-    nordzy-cursor-theme			# Cursor
+    #papirus-nord			# Icon-theme
+    #nordzy-cursor-theme		# Cursor
   ];
   home.file.".background-stylix" = {
     text = ''
@@ -72,18 +72,54 @@ in {
     executable = true;
   };
  
-  # GTK Styling
+  # DConf
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = if (themePolarity == "dark") then "prefer-dark" else "prefer-light";
+      };
+    };
+  };
+
+  # GTK Application Styling
   gtk = {
     enable = true;
     iconTheme = {
-      package = "${pkgs.papirus-nord}";
+      package = pkgs.papirus-nord;
       name = "Papirus-Nord";
     };
     cursorTheme = {
-      package = "${pkgs.nordzy-cursor-theme}";
+      package = pkgs.nordzy-cursor-theme;
       name = "Nordzy-Cursors";
       size = 36;
     };
-    theme.name = lib.mkForce userSettings.theme;
+    theme = {
+      package = lib.mkForce pkgs.gnome.gnome-themes-extra;
+      name = lib.mkForce "Adwaita";
+    };
+     
+    # -- GTK*i version -- #
+    gtk3.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme = ${if (themePolarity == "dark") then "1" else "0" };
+      '';
+    };
+    gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme = ${if (themePolarity == "dark") then "1" else "0" };
+      '';
+    };
+  };
+  home.sessionVariables.GTK_THEME = "Adwaita";
+
+  # QT Application Styling
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = {
+      package = pkgs.adwaita-qt;
+      name = "adwaita-dark";
+    };
   };
 }

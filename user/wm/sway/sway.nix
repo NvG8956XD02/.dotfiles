@@ -6,6 +6,11 @@ let
     size = 11.0;
   };
   swaylock = "${pkgs.swaylock}/bin/swaylock";
+  buttons = {
+    mod = "Mod4";
+    alt = "Mod1";
+    dot = "Period";
+  };
 in { 
   imports = [
     (./. + "../../../app/terminal"+("/"+userSettings.term)+".nix")
@@ -19,7 +24,7 @@ in {
     enable = true;
     xwayland = true;
     config = {
-        modifier = "Mod4";
+        modifier = buttons.mod;
       	terminal = userSettings.term;
         #menu = userSettings.launcher; 
         gaps = {
@@ -66,10 +71,13 @@ in {
           # -- Basic stuff -- #
           "${mod}+Shift+Return" = "exec ${terminal}";
           "${mod}+Shift+Q" = "kill"; 
+          "${mod}+l" = "exec swaylock";
+          
+          # -- Rofi Launcher -- # 
           "${mod}+p" = "exec rofi -modes 'file-browser-extended' -show file-browser-extended -file-browser-dir ~";
           "--release Super_L" = "exec rofi -modes 'drun' -show drun"; 
-          "${mod}+Tab" = "exec rofi -modes 'window'  -show window";
-          "${mod}+l" = "exec swaylock";
+          "${mod}+Tab" = "exec rofi -modes 'window' -show window";
+          "${mod}+${buttons.dot}" = "exec rofi -modes 'emoji' -show emoji";
 
           # --= [ Window ] =-- #
           # Focus - Move
