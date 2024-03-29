@@ -11,7 +11,7 @@ in {
     history.size = 1024;
     enableAutosuggestions = true;
     initExtra = ''
-      pfetch;
+      neofetch-dashboard;
     '';
   };
 
@@ -19,9 +19,5 @@ in {
     enable = true;
     enableCompletion = true;
     shellAliases = myAliases;
-  };
-
-  home.packages = with pkgs; [
-  
-  ];
+  }; 
 }

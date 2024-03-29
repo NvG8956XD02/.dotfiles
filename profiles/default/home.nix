@@ -22,10 +22,6 @@
     alacritty
     git
     vim
-    
-    ## fetch
-    neofetch
-    pfetch
   ];
   
   xdg.enable = true;

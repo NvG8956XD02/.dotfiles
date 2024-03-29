@@ -7,6 +7,7 @@
     ../../user/style/stylix.nix 
     ../../user/shell/starship.nix
     ../../user/app/games/games.nix
+    ../../user/app/discord/discord.nix 
   ];
  
   home.username = userSettings.username;
@@ -33,6 +34,7 @@
     gimp	# Image Manipulator
     kdenlive 	# Video editor   
 
+    # -- Own Packages -- #
   ];
 
   programs.home-manager.enable = true;

@@ -77,6 +77,7 @@ in {
           "${mod}+p" = "exec rofi -modes 'file-browser-extended' -show file-browser-extended -file-browser-dir ~";
           "--release Super_L" = "exec rofi -modes 'drun' -show drun"; 
           "${mod}+Tab" = "exec rofi -modes 'window' -show window";
+          "${mod}+Shift+C" = "exec rofi -modes 'calc' -show calc -no-show-match -no-sort";
           "${mod}+${buttons.dot}" = "exec rofi -modes 'emoji' -show emoji";
 
           # --= [ Window ] =-- #

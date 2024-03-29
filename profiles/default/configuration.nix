@@ -129,6 +129,7 @@
   ] ++ ( [
     (import (./. + "../../../user/bin/scripts/apply-system.nix") { inherit pkgs; })
     (import (./. + "../../../user/bin/scripts/apply-home.nix") { inherit pkgs; })
+    (import (./. + "../../../user/bin/scripts/neofetch-dashboard/neofetch-dashboard.nix") { inherit pkgs; })
   ]);
   
   security.polkit.enable = true; 

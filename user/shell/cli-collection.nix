@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    disfetch neofetch lolcat onefetch starfetch
+    neofetch
     libnotify
     timer
     killall
@@ -9,5 +9,7 @@
     hwinfo
     brightnessctl
     unzip
+    libsixel 
+    imagemagick 
   ];
 }
