@@ -38,6 +38,8 @@
       ../../system/security/ssh.nix		# OpenSSH 
       
       ../../system/style/stylix.nix		# Stylix
+
+      ../../user/bin/scripts/scripts.nix	# Own Commands
     ];
  
   # -- Kernel modules
@@ -126,11 +128,7 @@
     git
     git-crypt
     home-manager
-  ] ++ ( [
-    (import (./. + "../../../user/bin/scripts/apply-system.nix") { inherit pkgs; })
-    (import (./. + "../../../user/bin/scripts/apply-home.nix") { inherit pkgs; })
-    (import (./. + "../../../user/bin/scripts/neofetch-dashboard/neofetch-dashboard.nix") { inherit pkgs; })
-  ]);
+  ];
   
   security.polkit.enable = true; 
   system.stateVersion = "23.11"; # Did you read the comment?
