@@ -23,6 +23,8 @@
       display-drun = "🖥️ Apps: ";
       display-file-browser-extended = "🗄️ Files: ";
       display-window = "🪟 Windows: ";
+      display-emoji = "😀 Emoji: ";
+      display-calc = "🧮 Calculator: ";
     };
 
   };

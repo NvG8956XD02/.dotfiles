@@ -6,7 +6,7 @@
     ../../user/shell/sh.nix
     ../../user/shell/cli-collection.nix 
     ../../user/app/git/git.nix
-    ../../user/app/launcher/rofi.nix
+    ../../user/app/launcher/rofi/rofi.nix
     ../../user/app/filemanager/yazi.nix
     (./. + "../../../user/app/browser/"+("/"+userSettings.browser)+".nix")
   ];

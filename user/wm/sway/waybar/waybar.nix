@@ -85,7 +85,9 @@ in {
             format-icons = {
               default = "${icons.power-off}";
             };
-            on-click = "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Suspend' 'systemctl suspend' -b 'Shutdown' 'systemctl shutdown' -b 'Reboot' 'systemctl reboot' ";
+            on-click = ''
+              $HOME/.dotfiles/user/app/launcher/rofi/rofi-power-menu/power.sh;
+            '';
           };
     }];
     #${builtins.readFile "${pkgs.waybar}/etc/xdg/waybar/style.css"}
