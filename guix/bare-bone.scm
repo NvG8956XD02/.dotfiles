@@ -4,14 +4,14 @@
 	     (nongnu packages linux)
              (nongnu system linux-initrd))
 
-(use-service-modules desktop sddm xorg)
-(use-package-modules certs gnome)
+(use-service-modules networking ssh desktop)
+(use-package-modules screen certs )
 
 (operating-system
   (kernel linux)
   (initrd microcode-initrd)
   (firmware (list linux-firmware))
-  (host-name "asgaard")
+  (host-name "ruins")
   (timezone "Europe/Budapest")
   (locale "en_US.utf8")
 
@@ -21,17 +21,31 @@
                 (targets '("/boot/efi"))
                 (keyboard-layout keyboard-layout)))
 
+ (mapped-devices
+   (list (mapped-device
+           (source (uuid "12345678-1234-1234-1234-123456789abc"))
+           (target "crypt-root")
+           (type luks-device-mapping)))
+
   (file-systems (append
                  (list (file-system
                          (device (file-system-label "guix-linux"))
                          (mount-point "/")
                          (type "btrfs")
-                         (options "relatime,space_cache=v2,compress=lzo,subvol=@"))
+                         (options "noatime,space_cache=v2,compress=lzo,discard=async,subvol=@")
+			 (dependencies mapped-devices))
 		       (file-system
                          (device (file-system-label "guix-linux"))
                          (mount-point "/home")
                          (type "btrfs")
-                         (options "relatime,space_cache=v2,compress=zstd,subvol=@home"))
+                         (options "relatime,space_cache=v2,compress=zstd,discard=async,subvol=@home")
+		         (dependencies mapped-devices))
+		       (file-system
+                         (device (file-system-label "guix-linux"))
+                         (mount-point "/gnu/store")
+                         (type "btrfs")
+                         (options "noatime,space_cache,compress=lzo,discard=async,subvol=@gnu")
+		         (dependencies mapped-devices))
                        (file-system
                          (device (uuid "1234-ABCD" 'fat))
                          (mount-point "/boot/efi")
@@ -54,18 +68,5 @@
                      gvfs)
                     %base-packages))
 
-  (services (if (target-x86-64?)
-                (append (list (service gnome-desktop-service-type)
-                              (service xfce-desktop-service-type)
-                              (set-xorg-configuration
-                               (xorg-configuration
-                                (keyboard-layout keyboard-layout))))
-                        %desktop-services)
-                (append (list (service mate-desktop-service-type)
-                              (service xfce-desktop-service-type)
-                              (set-xorg-configuration
-                               (xorg-configuration
-                                (keyboard-layout keyboard-layout))
-                               sddm-service-type))
-                        %desktop-services)))
+  (services  %desktop-services)
   (name-service-switch %mdns-host-lookup-nss))
