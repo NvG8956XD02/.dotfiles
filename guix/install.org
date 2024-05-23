@@ -1,0 +1,94 @@
+#+TITLE:  Guix Install
+#+AUTHOR: Davy
+
+* -- Guix System Instalisation -- *
+This is the helper for Install Guix System, Maybe other time i do a shell script for that... now
+
+** Prep
+- Create your Pendrive with (Guix Installer 1.4.0)
+- Make yourself Network (Guix at default not have wifi, please be prepared )
+- Make sure you make Coffee, or Tea because sometimes it's be very long instaling time
+
+Make sure your 'loadkeys are good...
+ 
+** Partition
+#+begin_src sh
+gdisk /dev/nvme0n1
+: n
+:
+: +1GiB
+: ef00
+
+: n
+: 
+: +190GiB
+: 8300
+#+end_src
+After the Disk partition, get ready to install
+
+** Installisation - Part 1 
+There we go to create the base 
+#+begin_src sh
+mkfat.fat -F32 /dev/nvme0n1p1
+
+cryptsetup luksFormat --type luks2 --align-payload=8192 -s 256 -c aes-xts-plain64 /dev/nvme0n1p2
+cryptsetup luksOpen /dev/nvme0n1p2 crypt
+
+mkfs.btrfs /dev/mapper/crypt -L guix-crypt -n 32k -f
+
+mount /dev/mapper/crypt /mnt
+cd /mnt
+btrfs su cr @
+btrfs su cr @home
+btrfs su cr @gnu
+btrfs su cr @logs
+btrfs su cr @swap
+
+cd .. 
+umount /mnt
+
+mount -o subvol=@ /dev/mapper/crypt /mnt
+mkdir -p /mnt/{home,boot/efi,var/log,var/swap,gnu/store}
+
+mount -o subvol=@home /dev/mapper/crypt /mnt/home
+mount -o subvol=@logs /dev/mapper/crypt /mnt/var/log
+mount -o subvol=@gnu /dev/mapper/crypt /mnt/gnu/store
+mount -o subvol=@swap /dev/mapper/crypt /mnt/var/swap
+mount /dev/nvme0n1p1 /mnt/boot/efi
+
+truncate -s 0 /mnt/var/swap/swapfile
+chattr +C /mnt/var/swap/swapfile
+fallocate -l 16G /mnt/var/swap/swapfile
+chmod 600 /mnt/var/swap/swapfile
+chmod 0700 /mnt/var/swap
+mkswap /mnt/var/swap/swapfile
+swapon /mnt/var/swap/swapfile
+
+#+end_src
+
+** Installisation - Part 2
+There is the fun goes down, there are morly a big waiting process
+
+#+begin_src sh
+herd start cow-store /mnt
+
+guix install git
+
+mkdir -p ~/.dotfiles
+cd ~/.dotfiles
+git clone -b guix https://github.com/NvG8956XD02/.dotfiles .
+
+mkdir ~/.config/guix
+cp ~/.dotfiles/guix/congif/.channels.scm ~/.config/guix/channels.scm
+
+guix pull
+hash guix
+
+blkid
+#+end_src 
+Sometimes guix pul goest error something like "Wrong Gateway" stuff, them run 'guix install guix' before pull, works all time
+---
+Now you make sure to write into config \( ~/.dotfiles/guix/bare-bone.scm \) your UUID, and disk partitions.
+This will be your root system, no unecessary things, only brings up which need to boot and that's it. 
+We will use guix home for build desktop and stuffs
+
