@@ -19,7 +19,7 @@
   (kernel linux)
   (initrd microcode-initrd)
   (firmware (list linux-firmware))
-  (host-name "ruins")
+  (host-name "heim")
   (timezone "Europe/Budapest")
   (locale "en_US.utf8")
 
@@ -30,28 +30,15 @@
                 (bootloader grub-efi-bootloader)
                 (targets '("/boot/efi"))
                 (keyboard-layout keyboard-layout)))
+  
+  (file-systems (cons*
+                  (file-system
+                   (mount-point "/tmp")
+                   (device "none")
+                   (type "tmpfs")
+                   (check? #f))
+                  %base-file-systems))
 
-  (file-systems (cons* 
-		  (file-system
-                         (device (file-system-label "guix-linux"))
-                         (mount-point "/")
-                         (type "btrfs")
-                         (options "space_cache=v2,compress=lzo,discard=async,subvol=@"))
-		       (file-system
-                         (device (file-system-label "guix-linux"))
-                         (mount-point "/home")
-                         (type "btrfs")
-                         (options "space_cache=v2,compress=zstd,discard=async,subvol=@home"))
-		       (file-system
-                         (device (file-system-label "guix-linux"))
-                         (mount-point "/gnu/store")
-                         (type "btrfs")
-                         (options "space_cache,compress=lzo,discard=async,subvol=@gnu"))
-                       (file-system
-                         (device (uuid "1234-ABCD" 'fat))
-                         (mount-point "/boot/efi")
-                         (type "vfat"))
-                 %base-file-systems))
 
   (users (cons (user-account
                 (name "davy")
